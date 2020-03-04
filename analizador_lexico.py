@@ -6,15 +6,15 @@ import sys
 
 
 tokens = ['ID','NUMBER','PLUS','MINUS','TIMES','DIVIDE',
-'ODD','ASSIGN','NE','LTE','LT','GT','GTE','LPARENT',
-'RPARENT','COMMA','SEMMICOLOM','DOT','KEY_R','KEY_L','COR_R','COR_L', 'UNI_CH','UPDATE'
+'ODD','ASSIGN','NE','LOQ','LT','GT','MOQ','LPARENT',
+'RPARENT','COMMA','SEMMICOLOM','DOT','KEY_R','KEY_L','COR_R','COR_L', 'UNI_CH', 'EXCL','UPDATE'
 ]
 
 reservadas= {
 	'begin':'BEGIN',
 	'end':'END',
 	'if': 'IF',
-	'then':'THEN',
+	'then ':'THEN',
 	'while': 'WHILE',
 	'set': 'SET',
 	'do': 'DO',
@@ -58,9 +58,9 @@ t_ODD= r'ODD'
 t_ASSIGN = r'='
 t_NE= r'<>'
 t_LT= r'<'
-t_LTE= r'<='
+t_LOQ= r'<='
 t_GT= r'>'
-t_GTE= r'>='
+t_MOQ= r'>='
 t_LPARENT= r'\('
 t_RPARENT= r'\)'
 t_COMMA= r','
@@ -72,6 +72,8 @@ t_COR_R= r'\]'
 t_COR_L= r'\['
 t_UPDATE= r':='
 t_UNI_CH= r'\''
+t_EXCL= r'!'
+
 def t_ID(t):
 	r'[a-zA-Z_][a-zA-Z0-9_]*'
 	if t.value.upper() in reservadas:
@@ -93,7 +95,7 @@ def t_NUMBER(t):
 
 
 def t_error(t):
-	print ("caracter invalido '%s'" % t.value[0])
+	print ("caracter invalido '%j'" % t.value[0])
 	t.lexer.skip(1)
 
 def t_ccode_nonspace(t):
@@ -101,11 +103,11 @@ def t_ccode_nonspace(t):
 	pass
 
 
-test = 'C:/Users/aleve/Desktop/proyect/ply/test/prueba_2-1.txt'
+archivo = 'C:/Users/aleve/Desktop/proyect/ply/test/prueba_2-1.txt'
 
-fp = codecs.open(test,"r","utf-8")
-cadena = fp.read()
-fp.close()
+lectura = codecs.open(archivo,"r","utf-8")
+cadena = lectura.read()
+lectura.close()
 analizador= lex.lex ()
 analizador.input(cadena)
 
