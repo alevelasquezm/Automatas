@@ -7,7 +7,7 @@ import sys
 
 tokens = ['ID','NUMBER','PLUS','MINUS','TIMES','DIVIDE',
 'ODD','ASSIGN','NE','LTE','LT','GT','GTE','LPARENT',
-'RPARENT','COMMA','SEMMICOLOM','DOT','UPDATE'
+'RPARENT','COMMA','SEMMICOLOM','DOT','KEY_R','KEY_L','COR_R','COR_L', 'UNI_CH','UPDATE'
 ]
 
 reservadas= {
@@ -26,9 +26,24 @@ reservadas= {
 	'in': 'IN',
 	'else': 'ELSE',
 	'token': 'TOKEN',
+	'actions': 'ACTIONS',
+	'reservadas': 'RESERVADAS',
 	'program': 'PROGRAM',
 	'include': 'INCLUDE',
-	'const': 'CONST'
+	'const': 'CONST',
+	'type': 'TYPE',
+	'var': 'VAR',
+	'record': 'RECORD',
+	'array': 'ARRAY',
+	'of': 'OF',
+	'function': 'FUNCTION',
+	'for': 'FOR',
+	'to': 'TO',
+	'exit': 'EXIT',
+	'case': 'CASE',
+	'break':'BREAK',
+	'downto': 'DOWNTO'
+
 
 }
 
@@ -51,8 +66,12 @@ t_RPARENT= r'\)'
 t_COMMA= r','
 t_SEMMICOLOM = r';'
 t_DOT = r'\.'
+t_KEY_R= r'\}'
+t_KEY_L= r'\{'
+t_COR_R= r'\]'
+t_COR_L= r'\['
 t_UPDATE= r':='
-
+t_UNI_CH= r'\''
 def t_ID(t):
 	r'[a-zA-Z_][a-zA-Z0-9_]*'
 	if t.value.upper() in reservadas:
@@ -82,7 +101,7 @@ def t_ccode_nonspace(t):
 	pass
 
 
-test = 'C:/Users/aleve/Desktop/proyect/ply/test/prueba0.pl0'
+test = 'C:/Users/aleve/Desktop/proyect/ply/test/prueba_2-1.txt'
 
 fp = codecs.open(test,"r","utf-8")
 cadena = fp.read()
